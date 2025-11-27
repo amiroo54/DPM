@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "pies": [
+    {
+      "name": "Quick Favorites",
+      "shortcut": "Q",
+      "mode": "Object Mode",
+      "enabled": true,
+      "uid": "5cacd80a-cd4b-49af-becc-12a699b30299",
+      "actions": [
+        {
+          "label": "Origin to 3D Cursor",
+          "icon": "TRANSFORM_ORIGINS",
+          "direction": "NW",
+          "code": "bpy.ops.object.origin_set(type='ORIGIN_CURSOR', center='MEDIAN')",
+          "highlight": "False"
+        },
+        {
+          "label": "Proportional Editing",
+          "icon": "PROP_ON",
+          "direction": "NE",
+          "code": "bpy.context.scene.tool_settings.use_proportional_edit_objects = not bpy.context.scene.tool_settings.use_proportional_edit_objects",
+          "highlight": "bpy.context.scene.tool_settings.use_proportional_edit_objects"
+        },
+        {
+          "label": "Pivot: Cursor",
+          "icon": "PIVOT_CURSOR",
+          "direction": "E",
+          "code": "bpy.context.scene.tool_settings.transform_pivot_point = 'CURSOR'",
+          "highlight": "bpy.context.scene.tool_settings.transform_pivot_point == 'CURSOR'"
+        },
+        {
+          "label": "Pivot: Individual Origins",
+          "icon": "PIVOT_INDIVIDUAL",
+          "direction": "S",
+          "code": "bpy.context.scene.tool_settings.transform_pivot_point = 'INDIVIDUAL_ORIGINS'",
+          "highlight": "bpy.context.scene.tool_settings.transform_pivot_point == 'INDIVIDUAL_ORIGINS'"
+        },
+        {
+          "label": "Pivot: Median Point",
+          "icon": "PIVOT_MEDIAN",
+          "direction": "N",
+          "code": "bpy.context.scene.tool_settings.transform_pivot_point = 'MEDIAN_POINT'",
+          "highlight": "bpy.context.scene.tool_settings.transform_pivot_point == 'MEDIAN_POINT'"
+        }
+      ]
+    },
+    {
+      "name": "Shading",
+      "shortcut": "Z",
+      "mode": "3D View",
+      "enabled": true,
+      "uid": "964b8313-c694-4580-ac9a-34b59c898e02",
+      "actions": [
+        {
+          "label": "Solid",
+          "icon": "SHADING_SOLID",
+          "direction": "E",
+          "code": "bpy.context.space_data.shading.type = 'SOLID'",
+          "highlight": "bpy.context.space_data.shading.type == 'SOLID'"
+        },
+        {
+          "label": "Wireframe",
+          "icon": "SHADING_WIRE",
+          "direction": "W",
+          "code": "bpy.context.space_data.shading.type = 'WIREFRAME'",
+          "highlight": "bpy.context.space_data.shading.type == 'WIREFRAME'"
+        },
+        {
+          "label": "Material Preview",
+          "icon": "SHADING_TEXTURE",
+          "direction": "S",
+          "code": "bpy.context.space_data.shading.type = 'MATERIAL'",
+          "highlight": "bpy.context.space_data.shading.type == 'MATERIAL'"
+        },
+        {
+          "label": "Rendered",
+          "icon": "SHADING_RENDERED",
+          "direction": "N",
+          "code": "bpy.context.space_data.shading.type = 'RENDERED'",
+          "highlight": "bpy.context.space_data.shading.type == 'RENDERED'"
+        },
+        {
+          "label": "EEVEE",
+          "icon": "MOD_ARRAY",
+          "direction": "NW",
+          "code": "bpy.context.scene.render.engine = 'BLENDER_EEVEE'",
+          "highlight": "bpy.context.scene.render.engine == 'BLENDER_EEVEE'"
+        },
+        {
+          "label": "Cycles",
+          "icon": "OUTLINER_OB_CAMERA",
+          "direction": "NE",
+          "code": "bpy.context.scene.render.engine = 'CYCLES'",
+          "highlight": "bpy.context.scene.render.engine == 'CYCLES'"
+        },
+        {
+          "label": "Toggle X-Ray",
+          "icon": "XRAY",
+          "direction": "SW",
+          "code": "bpy.ops.view3d.toggle_xray()",
+          "highlight": "bpy.context.space_data.shading.show_xray"
+        }
+      ]
+    },
+    {
+      "name": "Modeling Tools",
+      "shortcut": "D",
+      "mode": "Mesh",
+      "enabled": true,
+      "uid": "250c2918-869d-4cf2-98e9-5242fcfaa1c6",
+      "actions": [
+        {
+          "label": "Merge by Distance",
+          "icon": "AUTOMERGE_ON",
+          "direction": "N",
+          "code": "bpy.ops.mesh.remove_doubles()",
+          "highlight": "False"
+        },
+        {
+          "label": "Recalculate Normals",
+          "icon": "NORMALS_VERTEX",
+          "direction": "S",
+          "code": "bpy.ops.mesh.normals_make_consistent(inside=False)",
+          "highlight": "False"
+        },
+        {
+          "label": "Invert Normals",
+          "icon": "FILE_REFRESH",
+          "direction": "SW",
+          "code": "bpy.ops.mesh.flip_normals()",
+          "highlight": "False"
+        },
+        {
+          "label": "Select Sharp",
+          "icon": "SHARPCURVE",
+          "direction": "E",
+          "code": "bpy.ops.mesh.edges_select_sharp(sharpness=0.785398)",
+          "highlight": "False"
+        },
+        {
+          "label": "Edge Crease",
+          "icon": "MOD_EDGESPLIT",
+          "direction": "NE",
+          "code": "bpy.ops.transform.edge_crease('INVOKE_DEFAULT')",
+          "highlight": "False"
+        }
+      ]
+    }
+  ]
+}
