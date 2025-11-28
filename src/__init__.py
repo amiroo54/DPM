@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Dynamic Pie Menu Manager",
     "author": "Amiroof",
-    "version": (1, 2, 0),
+    "version": (1, 3, 0),
     "blender": (5, 0, 0),
     "location": "Preferences → Add-ons → Dynamic Pie Menu Manager",
     "description": "Create custom pie menus with full Python actions, dynamic highlighting, per-mode keymaps, and import/export of configs. Credit to Polyfjord for the idea and ChatGPT for a bit of help.",
