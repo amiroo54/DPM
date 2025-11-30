@@ -91,6 +91,6 @@ class DPM_OT_RefreshShortcuts(Operator):
     bl_idname = "dpm.refresh_shortcuts"
     bl_label = "Refresh Shortcuts"
     def execute(self, context):
-        build_and_register_pies(); refresh_shortcuts()
+        DPM_Functions.build_and_register_pies(); DPM_Functions.refresh_shortcuts()
         self.report({'INFO'}, "Pies rebuilt and shortcuts refreshed.")
         return {'FINISHED'}
