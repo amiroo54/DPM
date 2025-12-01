@@ -39,6 +39,32 @@ Dynamic Pie Manager is a Blender add-on to dynamically add pie menus to differen
 After installation, you can access the Dynamic Pie Menu Manager from:
 **Preferences** → **Add-ons** → **Dynamic Pie Menu Manager**
 
+## For Developers/Maintainers
+
+### Automated Extension Repository
+
+This repository uses GitHub Actions to automatically build and publish the add-on to a custom Blender extension repository.
+
+**Setup (One-time):**
+1. Go to repository **Settings** → **Pages**
+2. Under "Build and deployment", select **Source**: Deploy from a branch
+3. Select branch: **gh-pages** and folder: **/ (root)**
+4. Click **Save**
+
+**How it works:**
+- When changes are pushed to the `main` branch, a GitHub Actions workflow automatically:
+  1. Creates a ZIP archive of the add-on
+  2. Computes its SHA256 checksum
+  3. Generates an `index.json` file following Blender's extension repository schema
+  4. Publishes everything to the `gh-pages` branch
+  5. GitHub Pages serves the extension repository at `https://amiroo54.github.io/DPM/index.json`
+
+**Manual trigger:**
+You can also manually trigger the workflow from the **Actions** tab → **Build Blender Extension Repository** → **Run workflow**
+
+**Version management:**
+Currently, versions are derived from the commit SHA. To use semantic versioning or git tags, see the comments in `.github/workflows/build-extension-repo.yml`.
+
 ## License
 
 This project is licensed under the GNU General Public License v3.0 or later - see the [LICENSE](LICENSE) file for details.
