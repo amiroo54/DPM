@@ -1,0 +1,120 @@
+name: Build Blender Extension Repository
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Required for publishing to gh-pages
+permissions:
+  contents: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      
+      - name: Derive version identifier
+        id: version
+        run: |
+          # For now, use short commit SHA as version identifier
+          # TODO: Change to semantic versioning or git tags in the future
+          # Example: VERSION=$(git describe --tags --always)
+          VERSION=$(git rev-parse --short HEAD)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION"
+      
+      - name: Create releases directory
+        run: |
+          mkdir -p public/releases
+      
+      - name: Create add-on ZIP archive
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          # The add-on code is in the 'src' directory
+          # We need to rename it to match the expected structure for Blender
+          # Create a temporary directory with the proper name
+          mkdir -p /tmp/DPM
+          cp -r src/* /tmp/DPM/
+          
+          # Create the ZIP archive from the temporary directory
+          cd /tmp
+          zip -r DPM-${VERSION}.zip DPM
+          
+          # Move the ZIP to the releases directory
+          mv DPM-${VERSION}.zip $GITHUB_WORKSPACE/public/releases/
+          
+          echo "Created ZIP: DPM-${VERSION}.zip"
+          ls -lh $GITHUB_WORKSPACE/public/releases/
+      
+      - name: Compute SHA256 checksum
+        id: checksum
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          cd public/releases
+          CHECKSUM=$(sha256sum DPM-${VERSION}.zip | awk '{print $1}')
+          echo "checksum=$CHECKSUM" >> $GITHUB_OUTPUT
+          echo "SHA256: $CHECKSUM"
+      
+      - name: Generate index.json
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          CHECKSUM="${{ steps.checksum.outputs.checksum }}"
+          
+          # Create index.json following Blender's extension repository schema
+          # Based on bl_info from src/__init__.py:
+          # - name: "Dynamic Pie Menu Manager"
+          # - author: "Amiroof"
+          # - version: (1, 4, 0)
+          # - blender: (5, 0, 0)
+          # - category: "Interface"
+          
+          cat > public/index.json << EOF
+          {
+            "version": "v1",
+            "blocklist": [],
+            "data": [
+              {
+                "id": "dpm_manager",
+                "name": "Dynamic Pie Menu Manager",
+                "tagline": "Dynamically add pie menus to different shortcuts",
+                "version": "$VERSION",
+                "type": "add-on",
+                "tags": ["Pie Menu", "UI", "Productivity", "Interface"],
+                "blender_version_min": "4.2.0",
+                "license": ["GPL-3.0-or-later"],
+                "maintainer": "Amiroof",
+                "website": "https://github.com/amiroo54/DPM",
+                "copyright": ["Amiroof"],
+                "permissions": {
+                  "files": "Imports and exports pie menu configurations",
+                  "network": false
+                },
+                "archive_url": "https://amiroo54.github.io/DPM/releases/DPM-${VERSION}.zip",
+                "archive_size": $(stat -f%z public/releases/DPM-${VERSION}.zip 2>/dev/null || stat -c%s public/releases/DPM-${VERSION}.zip),
+                "archive_hash": "sha256:$CHECKSUM"
+              }
+            ]
+          }
+          EOF
+          
+          echo "Generated index.json:"
+          cat public/index.json
+      
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
+          force_orphan: true
+          commit_message: "Deploy extension repository for version ${{ steps.version.outputs.version }}"
