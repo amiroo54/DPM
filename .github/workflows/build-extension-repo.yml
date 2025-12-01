@@ -75,7 +75,8 @@ jobs:
           # - name: "Dynamic Pie Menu Manager"
           # - author: "Amiroof"
           # - version: (1, 4, 0)
-          # - blender: (5, 0, 0)
+          # - blender: (5, 0, 0) - Note: Using 4.2.0 as min version since that's when
+          #   the extension platform was introduced, and 5.0.0 is not yet released
           # - category: "Interface"
           
           cat > public/index.json << EOF
@@ -100,7 +101,7 @@ jobs:
                   "network": false
                 },
                 "archive_url": "https://amiroo54.github.io/DPM/releases/DPM-${VERSION}.zip",
-                "archive_size": $(stat -f%z public/releases/DPM-${VERSION}.zip 2>/dev/null || stat -c%s public/releases/DPM-${VERSION}.zip),
+                "archive_size": $(stat -c%s public/releases/DPM-${VERSION}.zip),
                 "archive_hash": "sha256:$CHECKSUM"
               }
             ]
