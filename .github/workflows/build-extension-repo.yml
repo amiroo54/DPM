@@ -75,8 +75,13 @@ jobs:
           # - name: "Dynamic Pie Menu Manager"
           # - author: "Amiroof"
           # - version: (1, 4, 0)
-          # - blender: (5, 0, 0) - Note: Using 4.2.0 as min version since that's when
-          #   the extension platform was introduced, and 5.0.0 is not yet released
+          # - blender: (5, 0, 0) in bl_info
+          # 
+          # NOTE: Using 4.2.0 as blender_version_min because:
+          # - Blender 4.2 introduced the extension platform with custom repositories
+          # - Blender 5.0 is not yet released (as of workflow creation)
+          # - This allows users with Blender 4.2+ to install from custom repository
+          # - The add-on owner should update bl_info if 4.2.0 is the actual minimum
           # - category: "Interface"
           
           cat > public/index.json << EOF
