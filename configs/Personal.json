@@ -4,7 +4,7 @@
     {
       "name": "Quick Favorites",
       "shortcut": "Q",
-      "mode": "Object Mode",
+      "mode": "3D View",
       "enabled": true,
       "uid": "5cacd80a-cd4b-49af-becc-12a699b30299",
       "actions": [
@@ -35,13 +35,6 @@
           "direction": "S",
           "code": "bpy.context.scene.tool_settings.transform_pivot_point = 'INDIVIDUAL_ORIGINS'",
           "highlight": "bpy.context.scene.tool_settings.transform_pivot_point == 'INDIVIDUAL_ORIGINS'"
-        },
-        {
-          "label": "Pivot: Median Point",
-          "icon": "PIVOT_MEDIAN",
-          "direction": "N",
-          "code": "bpy.context.scene.tool_settings.transform_pivot_point = 'MEDIAN_POINT'",
-          "highlight": "bpy.context.scene.tool_settings.transform_pivot_point == 'MEDIAN_POINT'"
         }
       ]
     },
@@ -105,7 +98,7 @@
     },
     {
       "name": "Modeling Tools",
-      "shortcut": "D",
+      "shortcut": "CTRL+Q",
       "mode": "Mesh",
       "enabled": true,
       "uid": "250c2918-869d-4cf2-98e9-5242fcfaa1c6",
@@ -143,6 +136,50 @@
           "icon": "MOD_EDGESPLIT",
           "direction": "NE",
           "code": "bpy.ops.transform.edge_crease('INVOKE_DEFAULT')",
+          "highlight": "False"
+        },
+        {
+          "label": "Merge",
+          "icon": "",
+          "direction": "NW",
+          "code": "bpy.ops.wm.call_menu(name=\"VIEW3D_MT_edit_mesh_merge\")",
+          "highlight": "False"
+        }
+      ]
+    },
+    {
+      "name": "Pie 4",
+      "shortcut": "Shift+Q",
+      "mode": "Mesh",
+      "enabled": true,
+      "uid": "de6cc8f2-80cf-4a4b-8aca-55863d32e028",
+      "actions": [
+        {
+          "label": "Proportional Editing",
+          "icon": "",
+          "direction": "N",
+          "code": "bpy.context.scene.tool_settings.proportional_edit = \"DISABLED",
+          "highlight": "bpy.context.scene.tool_settings.proportional_edit == \"DISABLED\""
+        },
+        {
+          "label": "Action",
+          "icon": "",
+          "direction": "N",
+          "code": "# bpy and context available\n",
+          "highlight": "False"
+        },
+        {
+          "label": "Action",
+          "icon": "",
+          "direction": "N",
+          "code": "# bpy and context available\n",
+          "highlight": "False"
+        },
+        {
+          "label": "Action",
+          "icon": "",
+          "direction": "N",
+          "code": "# bpy and context available\n",
           "highlight": "False"
         }
       ]
