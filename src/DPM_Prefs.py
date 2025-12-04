@@ -93,7 +93,7 @@ class DPM_AddonPreferences(AddonPreferences):
             icon = 'TRIA_DOWN' if not pie.collapsed else 'TRIA_RIGHT'
             row.prop(pie, "collapsed", text="", icon=icon, emboss=False)
             
-            row.prop(pie, "name", text="", emboss=False)
+            row.prop(pie, "name", text="")
             header.prop(pie, "enabled", text="Enabled", toggle=True)
             header.prop(pie, "export", text="Mark for Export", toggle=True)
             ops = header.row(align=True)
