@@ -1,0 +1,26 @@
+{
+  "version": "v1",
+  "blocklist": [],
+  "data": [
+    {
+      "id": "dpm_manager",
+      "name": "Dynamic Pie Menu Manager",
+      "tagline": "Dynamically add pie menus to different shortcuts",
+      "version": "2d905c6",
+      "type": "add-on",
+      "tags": ["Pie Menu", "UI", "Productivity", "Interface"],
+      "blender_version_min": "4.2.0",
+      "license": ["GPL-3.0-or-later"],
+      "maintainer": "Amiroof",
+      "website": "https://github.com/amiroo54/DPM",
+      "copyright": ["Amiroof"],
+      "permissions": {
+        "files": "Imports and exports pie menu configurations",
+        "network": false
+      },
+      "archive_url": "https://amiroo54.github.io/DPM/releases/DPM-2d905c6.zip",
+      "archive_size": 7022,
+      "archive_hash": "sha256:296c46ec8b3d6e1dae4b5933e6e37c679df96093ae466a7ac6ea4971f2a0e12d"
+    }
+  ]
+}
