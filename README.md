@@ -12,23 +12,6 @@ Dynamic Pie Manager is a Blender add-on to dynamically add pie menus to differen
 
 ## Installation
 
-### Option 1: Install from Custom Extension Repository (Recommended)
-
-1. Open Blender (version 4.2.0 or later)
-2. Go to **Edit** → **Preferences** → **Get Extensions**
-3. Click the **⚙** (Settings) icon in the top-right corner
-4. Click **Add Remote Repository**
-5. Enter the following repository URL:
-   ```
-   https://amiroo54.github.io/DPM/index.json
-   ```
-6. Click **OK** to add the repository
-7. Search for "Dynamic Pie Menu Manager" in the Extensions list
-8. Click **Install** to install the add-on
-9. The add-on will be automatically updated when new versions are released
-
-### Option 2: Manual Installation
-
 1. Download the latest release ZIP file from the [releases page](https://github.com/amiroo54/DPM/releases)
 2. In Blender, go to **Edit** → **Preferences** → **Add-ons**
 3. Click **Install...** and select the downloaded ZIP file
@@ -39,28 +22,31 @@ Dynamic Pie Manager is a Blender add-on to dynamically add pie menus to differen
 After installation, you can access the Dynamic Pie Menu Manager from:
 **Preferences** → **Add-ons** → **Dynamic Pie Menu Manager**
 
+There you can **Add new Pies**, **Edit existing pies** and **Import and Export Pies**.
+
+### Adding Pies
+
+By hitting **Add new Pie** button you can make a new blank pie menu. Here you can edit it's name, Enable and Disable it, Mark it for export and Remove it.
+
+### Editing Pies
+
+You can have up to 8 actions assigned to a pie menu. Each one has an icon, a direction (the direction it appears in the menu), a code and a highlight condition.
+
+### Importing and Exporting pies
+
+This is the main strength of this addon. You can mark the Pies you have designed for export, and get a json file which can be imported by anyone, or you can get a json file someone else made to use that. To see an example please refer to [my personal config](https://github.com/amiroo54/DPM/blob/main/configs/Personal.json).
+
+## To Do
+
+- [] Add a check to remove duplicate pies based on the uuid
+- [] Add a global repository for people to share their configs
+- [] Add support for more workspaces
+
 ## For Developers/Maintainers
 
 ### Automated Extension Repository
 
-This repository uses GitHub Actions to automatically build and publish the add-on to a custom Blender extension repository.
-
-**Setup (One-time):**
-1. Go to repository **Settings** → **Pages**
-2. Under "Build and deployment", select **Source**: Deploy from a branch
-3. Select branch: **gh-pages** and folder: **/ (root)**
-4. Click **Save**
-
-**How it works:**
-- When changes are pushed to the `main` branch, a GitHub Actions workflow automatically:
-  1. Creates a ZIP archive of the add-on
-  2. Computes its SHA256 checksum
-  3. Generates an `index.json` file following Blender's extension repository schema
-  4. Publishes everything to the `gh-pages` branch
-  5. GitHub Pages serves the extension repository at `https://amiroo54.github.io/DPM/index.json`
-
-**Manual trigger:**
-You can also manually trigger the workflow from the **Actions** tab → **Build Blender Extension Repository** → **Run workflow**
+This repository uses GitHub Actions to automatically build and publish the add-on to github releases.
 
 **Version management:**
 Currently, versions are derived from the commit SHA. To use semantic versioning or git tags, see the comments in `.github/workflows/build-extension-repo.yml`.
@@ -72,5 +58,4 @@ This project is licensed under the GNU General Public License v3.0 or later - se
 ## Credits
 
 - **Author**: Amiroof
-- **Inspired by**: Polyfjord's original idea
-- **Development assistance**: ChatGPT
+- **Inspired by**: Polyfjord's ["I made a free addon to work 4% faster in Blender!"](https://www.youtube.com/watch?v=JggpNfPA9iw) video.
