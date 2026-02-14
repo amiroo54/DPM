@@ -35,6 +35,13 @@
           "direction": "S",
           "code": "bpy.context.scene.tool_settings.transform_pivot_point = 'INDIVIDUAL_ORIGINS'",
           "highlight": "bpy.context.scene.tool_settings.transform_pivot_point == 'INDIVIDUAL_ORIGINS'"
+        },
+        {
+          "label": "Pivot: Median Point",
+          "icon": "PIVOT_MEDIAN",
+          "direction": "N",
+          "code": "bpy.context.scene.tool_settings.transform_pivot_point = 'MEDIAN_POINT'",
+          "highlight": "bpy.context.scene.tool_settings.transform_pivot_point == 'MEDIAN_POINT'"
         }
       ]
     },
@@ -93,6 +100,13 @@
           "direction": "SW",
           "code": "bpy.ops.view3d.toggle_xray()",
           "highlight": "bpy.context.space_data.shading.show_xray"
+        },
+        {
+          "label": "Toggle Overlay",
+          "icon": "",
+          "direction": "SE",
+          "code": "bpy.context.space_data.overlay.show_overlays = not bpy.context.space_data.overlay.show_overlays",
+          "highlight": "bpy.context.space_data.overlay.show_overlays"
         }
       ]
     },
@@ -143,43 +157,6 @@
           "icon": "",
           "direction": "NW",
           "code": "bpy.ops.wm.call_menu(name=\"VIEW3D_MT_edit_mesh_merge\")",
-          "highlight": "False"
-        }
-      ]
-    },
-    {
-      "name": "Pie 4",
-      "shortcut": "Shift+Q",
-      "mode": "Mesh",
-      "enabled": true,
-      "uid": "de6cc8f2-80cf-4a4b-8aca-55863d32e028",
-      "actions": [
-        {
-          "label": "Proportional Editing",
-          "icon": "",
-          "direction": "N",
-          "code": "bpy.context.scene.tool_settings.proportional_edit = \"DISABLED",
-          "highlight": "bpy.context.scene.tool_settings.proportional_edit == \"DISABLED\""
-        },
-        {
-          "label": "Action",
-          "icon": "",
-          "direction": "N",
-          "code": "# bpy and context available\n",
-          "highlight": "False"
-        },
-        {
-          "label": "Action",
-          "icon": "",
-          "direction": "N",
-          "code": "# bpy and context available\n",
-          "highlight": "False"
-        },
-        {
-          "label": "Action",
-          "icon": "",
-          "direction": "N",
-          "code": "# bpy and context available\n",
           "highlight": "False"
         }
       ]
