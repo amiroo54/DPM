@@ -2,9 +2,9 @@ name: Build Blender Extension Repository
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
+    tags:
+      - v*
+    workflow_dispatch:
 
 # Required for publishing to gh-pages
 permissions:
@@ -22,36 +22,29 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-      
-      - name: Derive version identifier
-        id: version
-        run: |
-          # For now, use short commit SHA as version identifier
-          # TODO: Change to semantic versioning or git tags in the future
-          # Example: VERSION=$(git describe --tags --always)
-          VERSION=$(git rev-parse --short HEAD)
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Version: $VERSION"
-      
-      - name: Create releases directory
-        run: |
-          mkdir -p public/releases
-      
+
       - name: Create add-on ZIP archive
         run: |
-          VERSION="${{ steps.version.outputs.version }}"
-          # The add-on code is in the 'src' directory
-          # We need to rename it to match the expected structure for Blender
-          # Create a temporary directory with the proper name
+          VERSION="${{ github.ref_name }}"
+
           mkdir -p /tmp/DPM
           cp -r src/* /tmp/DPM/
           
-          # Create the ZIP archive from the temporary directory
           cd /tmp
           zip -r DPM-${VERSION}.zip DPM
           
-          # Move the ZIP to the releases directory
-          mv DPM-${VERSION}.zip $GITHUB_WORKSPACE/public/releases/
-          
+          mkdir $GITHUB_WORKSPACE/dist/
+          mv DPM-${VERSION}.zip $GITHUB_WORKSPACE/dist/
+         
+          echo "ZIP_PATH=dist/DPM-${VERSION}.zip" >> $GITHUB_ENV
           echo "Created ZIP: DPM-${VERSION}.zip"
-          ls -lh $GITHUB_WORKSPACE/public/releases/
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          draft: true
+          files: ${{ env.ZIP_PATH }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
